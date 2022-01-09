@@ -34,5 +34,5 @@ spec:
         app: core-mvc
     spec:
       containers:
-      - image: $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER
+      - image: $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:$BUILD_NUMBER
         name: core-mvc
