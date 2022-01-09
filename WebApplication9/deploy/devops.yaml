@@ -1,0 +1,38 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: core-mvc
+  name: core-mvc-service
+  namespace: pm-system
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: core-mvc
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: core-mvc
+  name: core-mvc-app
+  namespace: pm-system
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: core-mvc
+  template:
+    metadata:
+      labels:
+        app: core-mvc
+    spec:
+      containers:
+      - image: $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER
+        name: core-mvc
